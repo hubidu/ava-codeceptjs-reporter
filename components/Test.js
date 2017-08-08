@@ -3,12 +3,14 @@ import Highlight from 'react-highlight'
 import Ansi from 'ansi-to-react'
 import moment from 'moment'
 
-import ScreenshotThumbnails from './ScreenshotThumbnails'
+import ScreenshotThumbnailsWithSourceCode from './ScreenshotThumbnailsWithSourceCode'
 import SuccessesAndFailuresBars from './SuccessesAndFailuresBars'
 import Collapsible from './Collapsible'
 
 import SuccessIcon from 'react-icons/lib/fa/thumbs-o-up'
 import FailureIcon from 'react-icons/lib/fa/thumbs-o-down'
+
+import { withState } from 'recompose'
 
 const Category = styled.h4`
     font-family: Arial, sans-serif;
@@ -48,8 +50,7 @@ const Red = styled.span`
 `
 
 const avgDuration = testRun => testRun.runs.map(run => run.duration).reduce((sum, duration) => sum + duration, 0) / testRun.runs.length
-const firstRun = testRun => testRun.runs[0]
-const lastRun = testRun => testRun.runs[testRun.runs.length - 1]
+const currentRun = (testRun, i) => testRun.runs[i]
 const sourceCode = run => run.error.sourceCode
     .map(entry => {
         return entry.line === run.error.sourceLocation.line ?
@@ -59,60 +60,51 @@ const sourceCode = run => run.error.sourceCode
 const screenshotUrl = run => `/api/screenshots/${encodeURIComponent(run.path)}/${encodeURIComponent(run.error.screenshot)}`
 const mapToSuccessAndFailure = runs => runs.map(run => ({ t: run.startedAt, value: run.duration, success: run.result === 'success'}))
 
-export default ({ run }) => {
+const enhance = withState('selectedTestRun', 'setSelectedTestRun', 0)
+
+export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
     return (
     <div>
-        <Category>{firstRun(run).prefix}</Category>
+        <Category>{currentRun(test, selectedTestRun).prefix}</Category>
         <Title>
-            {lastRun(run).result === 'error' ? 
+            {currentRun(test, selectedTestRun).result === 'error' ? 
                 <Red><FailureIcon/></Red> : <Green><SuccessIcon/></Green>}
-            {firstRun(run).title}
+            {currentRun(test, selectedTestRun).title}
         </Title>
-        <SuccessesAndFailuresBars data={mapToSuccessAndFailure(run.runs)} maxBars={50} />
-        <Info>
-            last run <b>{moment(lastRun(run).startedAt).fromNow()}</b>
-            &nbsp;|&nbsp;
-            <b>{run.runs.length}</b> runs
-            |&nbsp;
-            <b>{ Math.floor(avgDuration(run))}s</b> avg duration
-        </Info>
-        { lastRun(run).result === 'success' ?
-            <Collapsible label="Screenshots">
-                <ScreenshotThumbnails path={lastRun(run).path} screenshots={lastRun(run).screenshots} />
-            </Collapsible>
-            : null
-        }
 
-        { lastRun(run).result === 'error' ?
+        <SuccessesAndFailuresBars 
+            data={mapToSuccessAndFailure(test.runs)} 
+            maxBars={50}
+            selectedBar={selectedTestRun}
+            onBarClicked={barIndex => setSelectedTestRun(barIndex)}
+        />
+
+        <Info>
+            last run <b>{moment(currentRun(test, selectedTestRun).startedAt).fromNow()}</b>
+            &nbsp;|&nbsp;
+            <b>{test.runs.length}</b> runs
+            |&nbsp;
+            <b>{ Math.floor(avgDuration(test))}s</b> avg duration
+        </Info>
+
+        { currentRun(test, selectedTestRun).result === 'error' ?
             <div>
                 <ErrorMessage>
                     <Ansi>
-                        {lastRun(run).error.message}
+                        {currentRun(test, selectedTestRun).error.message}
                     </Ansi>
                 </ErrorMessage>
-
-                <h4>In Source</h4>
-                <small>{lastRun(run).error.sourceLocation.file}</small>
-                <Highlight className="javascript">
-                    {sourceCode(lastRun(run))}
-                </Highlight>
-
-
-                <h4>Stacktrace</h4>
-                <pre>
-                    {lastRun(run).error.stack}
-                </pre>
-                
-                <h4>Screenshot</h4>
-                <a href={lastRun(run).error.pageUrl}>{lastRun(run).error.pageUrl}</a>
-                <h6>{lastRun(run).error.pageTitle}</h6>
-                <img width={320} src={screenshotUrl(lastRun(run))} alt="Error Screenshot"/>
             </div>
 
             : null
         }
+
+        <Collapsible label="Screenshots">
+            <ScreenshotThumbnailsWithSourceCode run={currentRun(test, selectedTestRun)} />
+        </Collapsible>
+
         <p>
         </p>
     </div>
     )
-}
+})

@@ -2,14 +2,14 @@ import React from 'react'
 import 'isomorphic-fetch'
 import Head from 'next/head'
 
-import TestRun from '../components/TestRun'
+import Test from '../components/Test'
 
 export default class MyPage extends React.Component {
   static async getInitialProps () {
     // eslint-disable-next-line no-undef
     const res = await fetch('http://localhost:3000/api/test-runs')
     const json = await res.json()
-    return { testRuns: json }
+    return { tests: json }
   }
 
   render () {
@@ -21,7 +21,7 @@ export default class MyPage extends React.Component {
              <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/monokai-sublime.css" />
         </Head>      
         {
-            this.props.testRuns.map(testRun => <TestRun key={testRun.title} run={testRun}/>)
+            this.props.tests.map(test => <Test key={test.title} test={test}/>)
         }
         <br/>
         <br/>

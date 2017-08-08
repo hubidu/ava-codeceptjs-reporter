@@ -12,6 +12,7 @@ const Bar = styled.span`
     display: inline-block;
     vertical-align: bottom;
     background-color: ${props => props.success === true ? 'MediumSpringGreen' : 'OrangeRed'};
+    border: ${props => props.selected ? '1px solid blue' : '' };
     margin-right: ${props => props.barGap}px;
     width: ${props => props.width}px;
     height: ${props => Math.ceil(props.height)}px;
@@ -19,24 +20,27 @@ const Bar = styled.span`
 
 const defaultLabelFormatFn = d => moment(d.t).fromNow() + ', ' + d.value + ' s'
 
-export default ({ data, labelFormatFn = defaultLabelFormatFn, maxBars = 10, maxValue = 120 }) => {
+export default ({ data, selectedBar = 0, labelFormatFn = defaultLabelFormatFn, maxBars = 10, maxValue = 120, onBarClicked = () => {} }) => {
     const BarWidth = 10
-    const BarGap = 1
+    const BarGap = 2
     const Height = 20
     const Width = maxBars * (BarWidth + BarGap)
 
-    const dataSlice = data.reverse().slice(0, maxBars - 1)
+    const dataSlice = data.slice(0, maxBars - 1)
 
     return (
         <BarContainer height={Height} width={Width}>
             {
                 dataSlice.map((d, i) => 
                     <Bar key={i} 
+                        selected={selectedBar === i}
                         title={labelFormatFn(d)} 
                         barGap={BarGap} 
                         width={BarWidth} 
                         height={d.value * Height / maxValue} 
-                        success={d.success}>
+                        success={d.success}
+                        onClick={ev => onBarClicked(i)}
+                    >
                     </Bar>
                 )
             }
