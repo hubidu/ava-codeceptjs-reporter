@@ -12,26 +12,19 @@ import FailureIcon from 'react-icons/lib/fa/thumbs-o-down'
 
 import { withState } from 'recompose'
 
-const Category = styled.h4`
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-    color: #aaa;
-    margin: 4em 0 0 0;
-`
+// const Category = styled.h4`
+//     font-family: Arial, sans-serif;
+//     font-weight: normal;
+//     color: #aaa;
+//     margin: 4em 0 0 0;
+// `
 
-const Title = styled.h2`
-    content: '&#10004;';
-    font-family: Arial, sans-serif;
-    color: #666;
-    margin: 0.5em 0 0.3em 0;
-`
-
-const ErrorMessage = styled.h4`
-    color: OrangeRed;
-    border: 1px solid OrangeRed;
-    padding: 1em;
-    text-align: center;
-`
+// const ErrorMessage = styled.h4`
+//     color: OrangeRed;
+//     border: 1px solid OrangeRed;
+//     padding: 1em;
+//     text-align: center;
+// `
 
 const Info = styled.div`
     font-family: Arial, sans-serif;
@@ -65,46 +58,51 @@ const enhance = withState('selectedTestRun', 'setSelectedTestRun', 0)
 export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
     return (
     <div>
-        <Category>{currentRun(test, selectedTestRun).prefix}</Category>
-        <Title>
+        <div className={'ml4 black-30'}>{currentRun(test, selectedTestRun).prefix}</div>
+        <h2 className={'f5 f4-m f3-l fw2 black-70 mt0 mb1 lh-copy'}>
             {currentRun(test, selectedTestRun).result === 'error' ? 
                 <Red><FailureIcon/></Red> : <Green><SuccessIcon/></Green>}
             {currentRun(test, selectedTestRun).title}
-        </Title>
+        </h2>
 
-        <SuccessesAndFailuresBars 
-            data={mapToSuccessAndFailure(test.runs)} 
-            maxBars={50}
-            selectedBar={selectedTestRun}
-            onBarClicked={barIndex => setSelectedTestRun(barIndex)}
-        />
-
-        <Info>
-            last run <b>{moment(currentRun(test, selectedTestRun).startedAt).fromNow()}</b>
-            &nbsp;|&nbsp;
-            <b>{test.runs.length}</b> runs
-            |&nbsp;
-            <b>{ Math.floor(avgDuration(test))}s</b> avg duration
-        </Info>
-
-        { currentRun(test, selectedTestRun).result === 'error' ?
-            <div>
-                <ErrorMessage>
-                    <Ansi>
-                        {currentRun(test, selectedTestRun).error.message}
-                    </Ansi>
-                </ErrorMessage>
+        <div className={'ml4'}>
+        
+            <div className={'f6 mt0 mb1 black-40'}>
+                last run <b>{moment(currentRun(test, selectedTestRun).startedAt).fromNow()}</b>
+                &nbsp;|&nbsp;
+                <b>{test.runs.length}</b> runs
+                |&nbsp;
+                <b>{ Math.floor(avgDuration(test))}s</b> avg duration
             </div>
 
-            : null
-        }
 
-        <Collapsible label="Screenshots">
-            <ScreenshotThumbnailsWithSourceCode run={currentRun(test, selectedTestRun)} />
-        </Collapsible>
+            <SuccessesAndFailuresBars 
+                data={mapToSuccessAndFailure(test.runs)} 
+                maxBars={50}
+                selectedBar={selectedTestRun}
+                onBarClicked={barIndex => setSelectedTestRun(barIndex)}
+            />
 
-        <p>
-        </p>
+
+            { currentRun(test, selectedTestRun).result === 'error' ?
+                <div>
+                    <div className={'ba orange b--light-red br2 mt4 pa3'}>
+                        <Ansi>{currentRun(test, selectedTestRun).error.message}</Ansi>
+                    </div>
+                </div>
+
+                : null
+            }
+
+            <Collapsible label={`Screenshots (${test.runs.length})`}>
+                <ScreenshotThumbnailsWithSourceCode run={currentRun(test, selectedTestRun)} />
+            </Collapsible>
+
+            <p>
+            </p>
+        
+        </div>
+
     </div>
     )
 })

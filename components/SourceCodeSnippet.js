@@ -14,7 +14,9 @@ const sourceCode = (code, location) => code
 
 export default ({ code, location }) =>
     <SourceCodeSnippet>
-        {location.file}
+        <div className={'black-50'}>
+            {location.file}
+        </div>
         <Highlight className="javascript">
             {sourceCode(code, location)}
         </Highlight>
