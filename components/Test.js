@@ -12,27 +12,6 @@ import FailureIcon from 'react-icons/lib/fa/thumbs-o-down'
 
 import { withState } from 'recompose'
 
-// const Category = styled.h4`
-//     font-family: Arial, sans-serif;
-//     font-weight: normal;
-//     color: #aaa;
-//     margin: 4em 0 0 0;
-// `
-
-// const ErrorMessage = styled.h4`
-//     color: OrangeRed;
-//     border: 1px solid OrangeRed;
-//     padding: 1em;
-//     text-align: center;
-// `
-
-const Info = styled.div`
-    font-family: Arial, sans-serif;
-    font-size: 0.8em;
-    color: #aaa;
-    margin: 1em 0 0 0;
-`
-
 const Green = styled.span`
     color: MediumSpringGreen;
     margin-right: 10px;
@@ -50,7 +29,7 @@ const sourceCode = run => run.error.sourceCode
             entry.line + ' ==>' + entry.value
             : entry.line + '    ' + entry.value
     }).join('\n')
-const screenshotUrl = run => `/api/screenshots/${encodeURIComponent(run.path)}/${encodeURIComponent(run.error.screenshot)}`
+// const screenshotUrl = run => `/api/screenshots/${encodeURIComponent(run.path)}/${encodeURIComponent(run.error.screenshot)}`
 const mapToSuccessAndFailure = runs => runs.map(run => ({ t: run.startedAt, value: run.duration, success: run.result === 'success'}))
 
 const enhance = withState('selectedTestRun', 'setSelectedTestRun', 0)
@@ -61,7 +40,7 @@ export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
         <div className={'ml4 black-30'}>{currentRun(test, selectedTestRun).prefix}</div>
         <h2 className={'f5 f4-m f3-l fw2 black-70 mt0 mb1 lh-copy'}>
             {currentRun(test, selectedTestRun).result === 'error' ? 
-                <Red><FailureIcon/></Red> : <Green><SuccessIcon/></Green>}
+                <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>}
             {currentRun(test, selectedTestRun).title}
         </h2>
 
