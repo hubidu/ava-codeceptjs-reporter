@@ -14,21 +14,28 @@ export default class MyPage extends React.Component {
 
   render () {
     return (
-      <div className={'sans-serif bg-white black-80 helvetica pa5'}>
+      <div className={''}>
         <Head>
             <title>Test Report</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/monokai-sublime.css" />
             <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>            
-        </Head>      
-        <h1>UI Test Report</h1>
-        {
-            this.props.tests.map(test => <Test key={test.title} test={test}/>)
-        }
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+            <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet" />
+        </Head> 
+
+
+        <div className={'content ml1 mr1'}>
+          <h1>UI Test Report</h1>
+          {
+              this.props.tests.map(test =>
+                <Test key={test.title} test={test}/>
+              )
+          }
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+        </div>        
       </div>
     )
   }

@@ -18,7 +18,7 @@ export default class  extends React.Component {
 
         return (
             <div>
-                <h5 className={'link dim blue pointer'} onClick={this.handleClick.bind(this)}>
+                <h5 className={'link dim light-blue pointer'} onClick={this.handleClick.bind(this)}>
                     {
                         this.state.visible ? <ChevronDownIcon /> : <ChevronRightIcon /> 
                     }

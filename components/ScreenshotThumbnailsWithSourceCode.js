@@ -20,14 +20,18 @@ export default ({run}) =>
     <div>
         {
             run.screenshots.map((s, i) =>
-                <Container key={i}>
-                    <ScreenshotThumbnail success={s.success} title={s.page.title} url={s.page.url} path={run.path} screenshot={s.screenshot} />
-                    {
-                        s.codeStack.map((cs, i) => 
-                            <SourceCodeSnippet key={i} code={cs.source} location={cs.location} />
-                        )
-                    }
-                </Container>
+                <div key={i} className="bb b--black-10">
+                    <div className="flex">
+                        <div className="flex-auto w-33 mw6">
+                            <ScreenshotThumbnail success={s.success} title={s.page.title} url={s.page.url} path={run.path} screenshot={s.screenshot} />
+                        </div>
+                        <div className="flex-auto w-67">
+                        {
+                            s.codeStack.map((cs, i) => <SourceCodeSnippet key={i} code={cs.source} location={cs.location} />)
+                        }
+                        </div>
+                    </div>
+                </div>
             )
         }
 

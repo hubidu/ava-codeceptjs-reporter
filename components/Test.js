@@ -37,16 +37,17 @@ const enhance = withState('selectedTestRun', 'setSelectedTestRun', 0)
 export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
     return (
     <div>
-        <div className={'ml4 black-30'}>{currentRun(test, selectedTestRun).prefix}</div>
-        <h2 className={'f5 f4-m f3-l fw2 black-70 mt0 mb1 lh-copy'}>
+        <div className={'f7 black-40'}>{currentRun(test, selectedTestRun).prefix}</div>
+        <h2 className={'f4 fw1 black-70 mt2 mb2'}>
             {currentRun(test, selectedTestRun).result === 'error' ? 
                 <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>}
             {currentRun(test, selectedTestRun).title}
         </h2>
 
-        <div className={'ml4'}>
+
+        <div className={''}>
         
-            <div className={'f6 mt0 mb1 black-40'}>
+            <div className={'f7 mt0 mb1 black-40'}>
                 last run <b>{moment(currentRun(test, selectedTestRun).startedAt).fromNow()}</b>
                 &nbsp;|&nbsp;
                 <b>{test.runs.length}</b> runs
@@ -73,15 +74,14 @@ export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
                 : null
             }
 
-            <Collapsible label={`Screenshots (${test.runs.length})`}>
+            <Collapsible label={`Screenshots (${currentRun(test, selectedTestRun).screenshots.length})`}>
                 <ScreenshotThumbnailsWithSourceCode run={currentRun(test, selectedTestRun)} />
             </Collapsible>
 
             <p>
             </p>
-        
+            
         </div>
-
     </div>
     )
 })
