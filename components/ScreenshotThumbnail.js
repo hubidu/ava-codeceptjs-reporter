@@ -12,8 +12,8 @@ import styled from 'styled-components'
 const screenshotUrl = (path, filename) => `/api/screenshots/${encodeURIComponent(path)}/${encodeURIComponent(filename)}`
 
 export default ({ success, title, url, path, screenshot }) =>
-    <div className={success ? `br2 bg-washed-green ` : `br2 bg-light-red`}>
-        <figure>
+    <div>
+        <figure className={success ? `br2 ba bw2 b--light-green pa3` : `br2 ba bw2 b--light-red pa3`}>
             <h6 className="mt1 mb1 lh-copy">
                 <a href={url}>{url}</a>
             </h6>
