@@ -1,14 +1,9 @@
-DONE Add success and failure icons
-DONE Show all screenshots
-DONE Add web page title and url to report
-DONE Hide details in collapsible panel
-- DONE Switch to past test runs
-
-- DONE Create a CSS theme
-- Reverse order of screenshots
+- Improve clickability of bars
 - Show browser logs
 - Store screenshot time in reports and show relative time
-- Most recent test run should be selected by default
+- Provide an overview of available screenshots in s source code view
+- Fade out "old" tests (where the last run is old and the test has been renamed or deleted)
+- Compare steps of failed run with previous successful run
 - IDEA Create a notification application which also works on the report data
 - Improve error messages by adding the failed step + args to the error message (e. g. element not visible [but which element?])
 - Add report file while running

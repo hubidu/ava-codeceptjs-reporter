@@ -10,6 +10,10 @@ import styled from 'styled-components'
 // `
 
 const screenshotUrl = (path, filename) => `/api/screenshots/${encodeURIComponent(path)}/${encodeURIComponent(filename)}`
+const assetUrl = (path, filename) => `/api/assets/${encodeURIComponent(path)}/${encodeURIComponent(filename)}`
+
+const sourceFileFrom = screenshot => screenshot.replace('.png', '.html')
+const browserLogFileFrom = screenshot => screenshot.replace('.png', '.logs')
 
 export default ({ success, title, url, path, screenshot }) =>
     <div>
@@ -18,6 +22,14 @@ export default ({ success, title, url, path, screenshot }) =>
                 <a href={url}>{url}</a>
             </h6>
             <h6 className="mt1 mb1 lh-copy">{title}</h6>
+
+            <h6>
+                <a href={assetUrl(path, sourceFileFrom(screenshot))}>HTML</a>
+            </h6>
+            <h6>
+                <a href={assetUrl(path, browserLogFileFrom(screenshot))}>Logs</a>
+            </h6>
+
             <img className="" width={320} src={screenshotUrl(path, screenshot)} alt="Screenshot" />
             <figcaption className="f6 mt1 mb1 lh-copy">
                 {screenshot}
