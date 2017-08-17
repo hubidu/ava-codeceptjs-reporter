@@ -15,7 +15,7 @@
   "author": "Stefan Huber",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^0.21.0"
+    "ava": "^0.22.0"
   },
   "dependencies": {
     "ansi-to-react": "^1.4.2",
