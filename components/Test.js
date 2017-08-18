@@ -40,18 +40,26 @@ export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
     return (
         <div>
             <div className="flex">
-                <div className="flex-auto">
-
+                <div className="w-70">
                     <div className={'f7 black-40'}>{current.prefix}</div>
-                    <h2 className={'f4 fw1 black-70 mt2 mb2'}>
-                        {current.result === 'error' ? 
-                            <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>}
-                        {current.title}
-                    </h2>           
+
+                    <div className="flex">
+                        <div className="">
+                            <h2 className="mv0">
+                                {current.result === 'error' ? 
+                                    <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>}
+                            </h2>
+                        </div>
+                        <div className="w-90">
+                            <h2 className={'f4 fw1 black-70 mv1'}>
+                                {current.title}
+                            </h2>           
+                        </div>
+                    </div>
 
 
                 </div>
-                <div>
+                <div className="w-30">
                     <div className={'f7 mt0 mb1 black-40'}>
                         last run <b>{moment(current.startedAt).fromNow()}</b>
                         &nbsp;|&nbsp;
@@ -70,22 +78,24 @@ export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
                 
             </div>
 
-            { currentRun(test, selectedTestRun).result === 'error' ?
-                <div>
-                    <div className={'ba orange b--light-red br2 mt4 pa3'}>
-                        <Ansi>{current.error.message}</Ansi>
+            <div className="ml4">   
+                { currentRun(test, selectedTestRun).result === 'error' ?
+                    <div>
+                        <div className={'ba orange b--light-red br2 mt4 pa3'}>
+                            <Ansi>{current.error.message}</Ansi>
+                        </div>
                     </div>
-                </div>
 
-                : null
-            }
+                    : null
+                }
 
-            <Collapsible label={`Screenshots (${current.screenshots.length})`}>
-                <ScreenshotThumbnailsWithSourceCode run={current} />
-            </Collapsible>
+                <Collapsible label={`Screenshots (${current.screenshots.length})`}>
+                    <ScreenshotThumbnailsWithSourceCode run={current} />
+                </Collapsible>
 
-            <p>
-            </p>
+                <p>
+                </p>
+            </div>
                 
         </div>
     )
