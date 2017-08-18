@@ -24,7 +24,7 @@ export default class MyPage extends React.Component {
         </Head> 
 
 
-        <div className={'content ml1 mr1'}>
+        <div className={'content mh6'}>
           <h1>UI Test Report</h1>
           {
               this.props.tests.map(test =>

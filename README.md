@@ -1,3 +1,4 @@
+- For responsive tests: Put results for all devices under same test
 - Improve clickability of bars
 - Show browser logs
 - Store screenshot time in reports and show relative time
