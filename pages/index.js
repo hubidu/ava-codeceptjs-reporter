@@ -4,6 +4,9 @@ import Head from 'next/head'
 
 import Test from '../components/Test'
 
+const twoDecimals = num => parseFloat(Math.round(num * 100) / 100).toFixed(2)
+const sumDuration = tests => tests.reduce((sum, t) => sum + t.runs[0].duration, 0)
+
 export default class MyPage extends React.Component {
   static async getInitialProps () {
     // eslint-disable-next-line no-undef
@@ -26,6 +29,14 @@ export default class MyPage extends React.Component {
 
         <div className={'content mh6'}>
           <h1>UI Test Report</h1>
+          
+          <div className="black-70 mb3">
+            <strong>{this.props.tests.length}</strong> tests
+            |
+            &nbsp;
+            <strong>{twoDecimals(sumDuration(this.props.tests))}s</strong> overall duration
+          </div>
+
           {
               this.props.tests.map(test =>
                 <Test key={test.title} test={test}/>
