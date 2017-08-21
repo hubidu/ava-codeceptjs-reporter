@@ -1,3 +1,7 @@
+- Show accumulated (serial) test duration
+- Provide a filter for devices
+ -BUG Fix layout
+- BUG Reporter does not show all screenshots of dokumente-hochladen
 - For responsive tests: Put results for all devices under same test
 - Improve clickability of bars
 - Show browser logs

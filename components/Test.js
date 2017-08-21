@@ -22,14 +22,8 @@ const Red = styled.span`
 `
 
 const avgDuration = testRun => testRun.runs.map(run => run.duration).reduce((sum, duration) => sum + duration, 0) / testRun.runs.length
+const getErrorMessage = testRun => testRun.screenshots[0].message
 const currentRun = (testRun, i) => testRun.runs[i]
-const sourceCode = run => run.error.sourceCode
-    .map(entry => {
-        return entry.line === run.error.sourceLocation.line ?
-            entry.line + ' ==>' + entry.value
-            : entry.line + '    ' + entry.value
-    }).join('\n')
-// const screenshotUrl = run => `/api/screenshots/${encodeURIComponent(run.path)}/${encodeURIComponent(run.error.screenshot)}`
 const mapToSuccessAndFailure = runs => runs.map(run => ({ t: run.startedAt, value: run.duration, success: run.result === 'success'}))
 
 const enhance = withState('selectedTestRun', 'setSelectedTestRun', 0)
@@ -81,8 +75,8 @@ export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
             <div className="ml4">   
                 { currentRun(test, selectedTestRun).result === 'error' ?
                     <div>
-                        <div className={'ba orange b--light-red br2 mt4 pa3'}>
-                            <Ansi>{current.error.message}</Ansi>
+                        <div className={'f6 ba orange b--light-red br2 mv2 pa1'}>
+                            <Ansi>{getErrorMessage(current)}</Ansi>
                         </div>
                     </div>
 
