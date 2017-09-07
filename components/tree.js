@@ -5,11 +5,11 @@ const Tree = ({ node }) =>
     <ul className="list mv2 pl4">
     {
         Object.keys(node).map(subnodeName => 
-            subnodeName === 'test' ?
+            node[subnodeName].test ?
                 <li key={subnodeName} className="f7 black-40">
-                    {node.test.result === 'error' ? <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>}
+                    {node[subnodeName].test.result === 'error' ? <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>}
 
-                    {node.test.title}
+                    {node[subnodeName].test.title}
                 </li>
                 :
                 <li key={subnodeName}>
