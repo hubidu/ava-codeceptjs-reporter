@@ -1,12 +1,18 @@
-- Show accumulated (serial) test duration
-- Provide a filter for devices
+- DONE Show accumulated (serial) test duration
+
+- Group tests by device
+- Show I.says as outline for the test
+- FEAT Change Success/Failure Bars to show length of test run using lighter or darker color
+- FEAT Filter tests by device
  -BUG Fix layout
 - BUG Reporter does not show all screenshots of dokumente-hochladen
 - For responsive tests: Put results for all devices under same test
+- Take only successful tests into account when computing average duration
 - Improve clickability of bars
 - Show browser logs
+- Show when the test failed/succeeded the last time
 - Store screenshot time in reports and show relative time
-- Provide an overview of available screenshots in s source code view
+- FEAT Provide an overview of available screenshots in s source code view
 - Fade out "old" tests (where the last run is old and the test has been renamed or deleted)
 - Compare steps of failed run with previous successful run
 - IDEA Create a notification application which also works on the report data
