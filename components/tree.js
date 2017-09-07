@@ -6,7 +6,7 @@ const Tree = ({ node }) =>
     {
         Object.keys(node).map(subnodeName => 
             subnodeName === 'test' ?
-                <li className="f7 black-40">
+                <li key={subnodeName} className="f7 black-40">
                     {node.test.result === 'error' ? <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>}
 
                     {node.test.title}

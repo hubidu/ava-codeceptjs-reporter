@@ -10,7 +10,7 @@ export default class TreePage extends React.Component {
     const tests = testRuns.map(test => Object.assign({}, test.runs[0]))
 
     const tree = tests.reduce((result, test) => {
-        const prefixes = test.prefix.split(/\s*--\s*/)
+        const prefixes = test.prefix.indexOf('--') > -1 ? test.prefix.split(/\s*--\s*/) : test.prefix.split(/\s*\/\s*/)
         const prefixesAndTest = prefixes.concat(test)
 
         prefixesAndTest.reduce((agg, prefixOrTest) => {
