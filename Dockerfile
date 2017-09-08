@@ -13,6 +13,6 @@ ADD . /opt/app
 
 RUN npm run build
 
-EXPOSE 3000
+EXPOSE 4000
 
 CMD ["npm", "start", "/opt/e2e/__out"]
