@@ -37,7 +37,8 @@ const Tree = ({ className, node }) =>
                               {
                                   subnode._test.outline.steps.map(step => 
                                     <li className="mb1" key={step.name}>
-                                      <TestIcon result={step.success} />
+                                      { step.success !== undefined &&
+                                          <TestIcon result={step.success} />}
 
                                       {step.actualName || step.name}
                                     </li>
