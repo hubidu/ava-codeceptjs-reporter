@@ -1,5 +1,7 @@
 - DONE Show accumulated (serial) test duration
 
+- Propagate test results in tree
+- Split at - and capitalize prefix
 - Group tests by device
 - Show I.says as outline for the test
 - FEAT Change Success/Failure Bars to show length of test run using lighter or darker color

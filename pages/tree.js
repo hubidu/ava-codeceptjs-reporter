@@ -2,43 +2,26 @@ import React from 'react'
 
 import Layout from '../components/layout'
 import Tree from '../components/tree'
+
 import getTestRuns from '../services/get-test-runs'
+import makeTree from '../services/make-tree'
 
 export default class TreePage extends React.Component {
   static async getInitialProps () {
     const testRuns = await getTestRuns()
-    const tests = testRuns.map(test => Object.assign({}, test.runs[0]))
+    const tree = makeTree(testRuns)
 
-    const tree = tests.reduce((result, test) => {
-        const prefixes = test.fullTitle.indexOf('--') > -1 ? test.fullTitle.split(/\s*--\s*/) : test.fullTitle.split(/\s*\/\s*/)
-        const prefixesAndTest = prefixes.concat(test)
-
-        prefixesAndTest.reduce((agg, prefixOrTest) => {
-            if (typeof prefixOrTest === 'object') {
-                agg.test = prefixOrTest
-                return agg
-            } else {
-                agg[prefixOrTest] = agg[prefixOrTest] ? agg[prefixOrTest] : {}
-                return agg[prefixOrTest]
-            }
-        }, result)
-
-        return result
-    }, {})
-
-    console.log(tree)
-
-    // console.log(tree.versicherungscenter['tarife-vergleichen'].hausratversicherung.test)
-    
     return { tree }
   }
 
   render () {
     return (
-      <Layout title="Test Tree"> 
+      <Layout title="UI-Test Tree"> 
         <div className={'content mh6'}>
-          <h1>Test Tree</h1>
-          
+          <h1 className="silver">
+            UI-Test Tree
+          </h1>
+
           <Tree node={this.props.tree} />
         </div>        
       </Layout>
