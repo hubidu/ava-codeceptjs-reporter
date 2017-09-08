@@ -17,13 +17,11 @@ export default class TreePage extends React.Component {
   render () {
     return (
       <Layout title="UI-Test Tree"> 
-        <div className={'content mh6'}>
-          <h1 className="silver">
-            UI-Test Tree
-          </h1>
+        <h1 className="silver mt1">
+        UI-Test Tree
+        </h1>
 
-          <Tree node={this.props.tree} />
-        </div>        
+        <Tree node={this.props.tree} />
       </Layout>
     )
   }

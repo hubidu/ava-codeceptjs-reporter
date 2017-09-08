@@ -16,8 +16,7 @@ export default class IndexPage extends React.Component {
   render () {
     return (
       <Layout title="Detailed Test Report"> 
-        <div className={'content mh6'}>
-          <h1>UI Test Report</h1>
+          <h1 className="silver mt1">UI Test Report</h1>
           
           <div className="black-70 mb3">
             <strong>{this.props.tests.length}</strong> tests
@@ -35,7 +34,6 @@ export default class IndexPage extends React.Component {
           <br/>
           <br/>
           <br/>
-        </div>        
       </Layout>
     )
   }

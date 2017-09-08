@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 export default ({ children, title = 'This is the default title' }) => (
-  <div>
+  <div className="mh6">
     <Head>
         <title>{ title }</title>
         <meta charSet='utf-8' />
@@ -12,7 +12,12 @@ export default ({ children, title = 'This is the default title' }) => (
         <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>            
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet" />
     </Head> 
-
+    <nav className="pv1">
+      <div className="nowrap overflow-x-auto">
+        <a className="link dim blue f6 f6-ns dib mr3" href="/" title="Detailed Report">Detailed Report</a>
+        <a className="link dim blue f6 f6-ns dib mr3" href="/tree" title="Tree View">Tree View</a>
+      </div>
+    </nav>
     { children }
     
   </div>
