@@ -1,13 +1,14 @@
 - DONE Show accumulated (serial) test duration
+- DONE Propagate test results in tree
+- DONE Split at - and capitalize prefix
+- DONE Show I.says as outline for the test
 
-- Propagate test results in tree
-- Split at - and capitalize prefix
+- Show console messages in tree view
+- Show error message and error screenshot in tree view
+- Create a test detail view
 - Group tests by device
-- Show I.says as outline for the test
 - FEAT Change Success/Failure Bars to show length of test run using lighter or darker color
 - FEAT Filter tests by device
- -BUG Fix layout
-- BUG Reporter does not show all screenshots of dokumente-hochladen
 - For responsive tests: Put results for all devices under same test
 - Take only successful tests into account when computing average duration
 - Improve clickability of bars

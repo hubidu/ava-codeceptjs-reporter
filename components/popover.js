@@ -1,11 +1,11 @@
 import InfoIcon from 'react-icons/lib/fa/info-circle'
 
-export default ({ children }) =>
+export default ({ Icon = InfoIcon, children }) =>
     <div className="popover__wrapper">
         
         <a href="#">
             <span className="popover__title">
-                <InfoIcon />
+                <Icon />
             </span>
         </a>
         <div className="push popover__content">

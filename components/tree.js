@@ -5,8 +5,9 @@ import FailureIcon from 'react-icons/lib/fa/times-circle'
 
 import Pie from './pie'
 import Popover from './popover'
+import TestDetailPopover from './test-detail-popover'
 
-const TestIcon = ({ result }) => 
+const TestIcon = ({ result }) =>
     (result === 'error' || result === false) ? <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>
 
 
@@ -16,26 +17,28 @@ const Tree = ({ className, node }) =>
         Object.keys(node)
             .filter(key => !key.startsWith('_'))
             .map(subnodeName => node[subnodeName])
-            .map((subnode, i) => 
+            .map((subnode, i) =>
             subnode._test ?
                 <li key={i} className="f6 black-50 mb1">
                     <TestIcon result={subnode._test.result} />
 
-                    {subnode._test.title}
+                    <span className="black-80">
+                        {subnode._test.title}
+                    </span>
 
                     <strong className="f7 black-40">
-                       &nbsp;*&nbsp;
+                       &nbsp;|&nbsp;
                        {moment(subnode._test.startedAt).fromNow()}
                     </strong>
                     &nbsp;
                     {
                         subnode._test.outline.steps.length > 0 &&
-                        
+
                         <Popover>
-                            <h4 className="ma0 mb1">"{subnode._test.title}"</h4>
+                            <h4 className="ma0 mb1">{subnode._test.title}</h4>
                             <ul className="list black-80 f6 ml1 pl1">
                               {
-                                  subnode._test.outline.steps.map(step => 
+                                  subnode._test.outline.steps.map(step =>
                                     <li className="mb1" key={step.name}>
                                       { step.success !== undefined &&
                                           <TestIcon result={step.success} />}
@@ -46,7 +49,14 @@ const Tree = ({ className, node }) =>
                               }
                             </ul>
                         </Popover>
+
                     }
+                    <TestDetailPopover
+                      testPath={subnode._test.path}
+                      lastScreenshot={subnode._test.screenshots[0]}
+                    >
+                    </TestDetailPopover>
+
                 </li>
                 :
                 <li className="mt3" key={i}>
