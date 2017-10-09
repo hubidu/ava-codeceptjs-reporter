@@ -1,8 +1,8 @@
-import InfoIcon from 'react-icons/lib/fa/info-circle'
+import ListIcon from 'react-icons/lib/fa/list-ul'
 
-export default ({ Icon = InfoIcon, children }) =>
+export default ({ Icon = ListIcon, children }) =>
     <div className="popover__wrapper">
-        
+
         <a href="#">
             <span className="popover__title">
                 <Icon />
@@ -16,13 +16,14 @@ export default ({ Icon = InfoIcon, children }) =>
         a {
             text-decoration: none;
           }
-                  
+
         .popover__title {
             text-decoration: none;
-            color: #aaa;
+            color: #0074D9;
             padding: 5px 0;
+            margin-left: 10px;
           }
-          
+
           .popover__wrapper {
               position: relative;
             //   margin-top: 1.5rem;
@@ -35,10 +36,10 @@ export default ({ Icon = InfoIcon, children }) =>
               left: 50%;
               top: 0;
               transform: translate(-50%, -20px);
-              background-color: #ddd;
+              background-color: #fff;
               padding: 1.5rem;
               box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-              width: 450px;
+              width: 640px;
           }
           .popover__content:before {
               position: absolute;
@@ -61,6 +62,6 @@ export default ({ Icon = InfoIcon, children }) =>
           }
           .popover__message {
             text-align: center;
-          }        
+          }
       `}</style>
     </div>

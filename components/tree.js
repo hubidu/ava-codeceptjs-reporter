@@ -6,6 +6,7 @@ import FailureIcon from 'react-icons/lib/fa/times-circle'
 import Pie from './pie'
 import Popover from './popover'
 import TestDetailPopover from './test-detail-popover'
+import TestBrowserlogPopover from './test-browserlog-popover'
 
 const TestIcon = ({ result }) =>
     (result === 'error' || result === false) ? <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>
@@ -57,6 +58,7 @@ const Tree = ({ className, node }) =>
                     >
                     </TestDetailPopover>
 
+                    <TestBrowserlogPopover browserLog={subnode._test.logs} />
                 </li>
                 :
                 <li className="mt3" key={i}>

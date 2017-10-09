@@ -8,17 +8,17 @@ const screenshotUrl = (path, filename) => `/api/screenshots/${encodeURIComponent
 export default ({ testPath, lastScreenshot }) =>
   lastScreenshot.failed ?
     <Popover Icon={QuestionIcon}>
-      <h4 className="light-red">
+      <h4 className="mv0 mb2 light-red">
         {lastScreenshot.message}
       </h4>
+
+      <img className="db" src={screenshotUrl(testPath, lastScreenshot.screenshot)} alt={lastScreenshot.screenshot} />
+
+      <SourceCodeSnippet code={lastScreenshot.codeStack[0].source} location={lastScreenshot.codeStack[0].location} />
 
       <code className="f7 mb3">
         {lastScreenshot.orgStack}
       </code>
-
-      <SourceCodeSnippet code={lastScreenshot.codeStack[0].source} location={lastScreenshot.codeStack[0].location} />
-
-      <img className="db" src={screenshotUrl(testPath, lastScreenshot)} alt={lastScreenshot.screenshot} />
 
     </Popover>
   : null

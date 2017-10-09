@@ -4,7 +4,7 @@
 - DONE Show I.says as outline for the test
 
 - Show console messages in tree view
-- Show error message and error screenshot in tree view
+- DONE Show error message and error screenshot in tree view
 - Create a test detail view
 - Group tests by device
 - FEAT Change Success/Failure Bars to show length of test run using lighter or darker color
