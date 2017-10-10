@@ -13,7 +13,6 @@ ADD . /opt/app
 
 RUN npm run build
 
-USER bamboo
 EXPOSE 4000
 
 CMD ["npm", "start", "/opt/e2e/__out"]
