@@ -18,13 +18,13 @@ export default class  extends React.Component {
 
         return (
             <div>
-                <h5 className={'link dim blue pointer mt0 mb1 f7'} onClick={this.handleClick.bind(this)}>
+                <span className={'link dim blue pointer mt0 mb1 f7'} onClick={this.handleClick.bind(this)}>
                     {
-                        this.state.visible ? <ChevronDownIcon /> : <ChevronRightIcon /> 
+                        this.state.visible ? <ChevronDownIcon /> : <ChevronRightIcon />
                     }
-                    
+
                     {this.props.label}
-                </h5>
+                </span>
 
                 {this.state.visible ? this.props.children : null}
             </div>

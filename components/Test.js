@@ -5,7 +5,7 @@ import moment from 'moment'
 
 import ScreenshotThumbnailsWithSourceCode from './ScreenshotThumbnailsWithSourceCode'
 import SuccessesAndFailuresBars from './SuccessesAndFailuresBars'
-import Collapsible from './Collapsible'
+import Collapsible from './collapsible'
 
 import SuccessIcon from 'react-icons/lib/fa/check-circle'
 import FailureIcon from 'react-icons/lib/fa/times-circle'
@@ -35,19 +35,19 @@ export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
         <div>
             <div className="flex">
                 <div className="w-70">
-                    <div className={'f7 black-40'}>{current.prefix}</div>
+                    <div className={'f7 black-50'}>{current.prefix}</div>
 
                     <div className="flex">
                         <div className="">
                             <h2 className="mv0">
-                                {current.result === 'error' ? 
+                                {current.result === 'error' ?
                                     <span className={'orange mr1'}><FailureIcon/></span> : <span className={'green mr1'}><SuccessIcon/></span>}
                             </h2>
                         </div>
                         <div className="w-90">
-                            <h2 className={'f4 fw1 black-70 mv1'}>
+                            <h5 className={'black-90 mv1'}>
                                 {current.title}
-                            </h2>           
+                            </h5>
                         </div>
                     </div>
 
@@ -62,17 +62,17 @@ export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
                         <b>{Math.floor(avgDuration(test))}s</b> avg duration
                     </div>
 
-                    <SuccessesAndFailuresBars 
-                        data={mapToSuccessAndFailure(test.runs)} 
+                    <SuccessesAndFailuresBars
+                        data={mapToSuccessAndFailure(test.runs)}
                         maxBars={50}
                         selectedBar={selectedTestRun}
                         onBarClicked={barIndex => setSelectedTestRun(barIndex)}
                     />
                 </div>
-                
+
             </div>
 
-            <div className="ml4">   
+            <div className="ml4">
                 { currentRun(test, selectedTestRun).result === 'error' ?
                     <div>
                         <div className={'f6 ba orange b--light-red br2 mv2 pa1'}>
@@ -90,7 +90,7 @@ export default enhance(({ test, selectedTestRun, setSelectedTestRun }) => {
                 <p>
                 </p>
             </div>
-                
+
         </div>
     )
 })
