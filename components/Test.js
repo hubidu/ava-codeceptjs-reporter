@@ -5,7 +5,7 @@ import moment from 'moment'
 
 import ScreenshotThumbnailsWithSourceCode from './ScreenshotThumbnailsWithSourceCode'
 import SuccessesAndFailuresBars from './SuccessesAndFailuresBars'
-import Collapsible from './collapsible'
+import Collapsible from './Collapsible'
 
 import SuccessIcon from 'react-icons/lib/fa/check-circle'
 import FailureIcon from 'react-icons/lib/fa/times-circle'
