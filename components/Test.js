@@ -21,6 +21,7 @@ const Red = styled.span`
     margin-right: 10px;
 `
 
+
 const avgDuration = testRun => testRun.runs.map(run => run.duration).reduce((sum, duration) => sum + duration, 0) / testRun.runs.length
 const getErrorMessage = testRun => testRun.screenshots[0].message
 const currentRun = (testRun, i) => testRun.runs[i]
