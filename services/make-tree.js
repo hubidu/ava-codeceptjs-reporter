@@ -41,7 +41,7 @@ export default (testRuns, deviceType = 'desktop') => {
   const byDeviceType = test => test.deviceSettings && test.deviceSettings.type === deviceType
   // Get the latest test run
   const tests = testRuns
-                  .map(test => Object.assign({}, test.runs.filter(byDeviceType)[0]))
+                  .map(test => Object.assign({}, test.runs.filter(byDeviceType)[0])).filter(test => !!test)
 
   const tree = tests.reduce((result, test) => {
     const prefixes = test.fullTitle.split(/\s*--\s*/)
