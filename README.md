@@ -5,8 +5,10 @@
 - DONE Show console messages in tree view
 - DONE Show error message and error screenshot in tree view
 
+- Show recent deployments
 - Fix scrollbars
 - Show chart failed/successful tests
+- Show failed tests first in list
 - Show test status per device in tree view
 - Create a test detail view
 - Group tests by device
